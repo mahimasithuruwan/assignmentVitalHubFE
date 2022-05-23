@@ -5,10 +5,10 @@ import { LazyLoadEvent } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { finalize } from 'rxjs/operators';
 import { EnumAsStringPipe } from '../../shared/pipes';
-import { IOrder, OrderStatus, OrderThrough, OrderType } from '../order.model';
-import { OrderService } from '../order.service';
 import { Location } from '@angular/common';
 import { UIMessageService } from 'src/app/shared/services';
+import { OrderService } from 'src/app/orders';
+import { IOrder, OrderStatus, OrderType, OrderThrough } from 'src/app/orders/order.model';
 
 export enum SearchMethod {
   Regular,
@@ -16,11 +16,11 @@ export enum SearchMethod {
 }
 
 @Component({
-  selector: 'app-list-order',
-  templateUrl: './list-order.component.html',
-  styleUrls: ['./list-order.component.css'],
+  selector: 'app-list-item',
+  templateUrl: './list-item.component.html',
+  styleUrls: ['./list-item.component.css'],
 })
-export class ListOrderComponent implements OnInit {
+export class ListItemComponent implements OnInit {
   _pageTitle: string = 'Orders';
   _pageSubTitle: string = '';
   _activeTabIndex: number = 0;
