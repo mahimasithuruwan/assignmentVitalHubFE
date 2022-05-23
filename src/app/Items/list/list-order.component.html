@@ -1,0 +1,87 @@
+<p-confirmDialog key="listOrderConfirmDialog"
+                 header="Confirmation"
+                 icon="pi pi-exclamation-triangle"
+                 [style]="{ 'z-index': '100000 !important'}">
+</p-confirmDialog>
+
+<div class="p-grid">
+
+    <div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+
+        <div class="p-fluid">
+
+            <div class="custom-list-card">
+
+                <div class="custom-data-section">
+
+                    <form [formGroup]="_form">
+                        <p-tabView [(activeIndex)]="_activeTabIndex"
+                                   #userProfileTabView
+                                   (onChange)="onTabIndexChange($event)">
+                            <p-tabPanel header="In Queue">
+           
+                                <div class="p-col-12">
+                                    <div class="p-grid"
+                                         style="justify-content: center; padding-top: 30px;">
+                                        <p-card *ngFor="let order of _order"
+                                                header="{{order.OrderTypeId | enumAsString: _orderType}}"
+                                                subheader="{{order.OrderThroughId | enumAsString:_orderThrough }}"
+                                                [style]="{width: '360px'}"
+                                                styleClass="p-card-shadow">
+                                            <!-- <ng-template pTemplate="header">
+                                                <p> {{order.orderType}}</p>
+                                            </ng-template> -->
+                                            <p>
+                                                {{order.CreatedDateTime}}
+                                            </p>
+                                            <h2 *ngFor="let orderItem of order.OrderItems">
+                                                <p >
+                                                    {{orderItem.Items.Description}} {{orderItem.Quantity}} 
+                                                </p>
+                                            </h2>
+                                            <ng-template pTemplate="footer">
+                                                <button pButton
+                                                pRipple
+                                                type="button"
+                                                *ngIf="order.OrderStatusId==1"
+                                                label="In Queue"
+                                                [style]="{'width': '320px'}" (click)="statusChange(order)"></button>
+
+                                                <button *ngIf="order.OrderStatusId==2"
+                                                pButton
+                                                pRipple
+                                                type="button"
+                                                label="Mark as Prepared"
+                                                [style]="{'width': '320px'}" (click)="statusChange(order)"></button>
+                                            </ng-template>
+                                        </p-card>
+
+                                    </div>
+                        </div>
+                            </p-tabPanel>
+                            <p-tabPanel header="Prepared">
+                                <div class="custom-data-section app-p-1"
+                                     style="background-color: #e0e0e0; min-width: 400px; max-width: fit-content">
+                                    <div class="custom-data-sub-section">
+
+                                    </div>
+                                </div>
+                            </p-tabPanel>
+                            <p-tabPanel header="Cancelled">
+                                <div class="custom-data-section app-p-1"
+                                     style="background-color: #e0e0e0; min-width: 400px; max-width: fit-content">
+                                    <div class="custom-data-sub-section">
+
+                                    </div>
+                                </div>
+                            </p-tabPanel>
+                        </p-tabView>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
